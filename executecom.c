@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/wait.h>
+extern char **environ;
 
 void executeCommand(const char *command) {
     pid_t pid;
@@ -24,6 +25,14 @@ void executeCommand(const char *command) {
     if (strcmp(args[0], "exit") == 0) {
      
         exit(EXIT_SUCCESS);
+    }
+    if (strcmp(args[0], "env") == 0) {
+        char **env = environ;
+        while (*env != NULL) {
+            printf("%s\n", *env);
+            env++;
+        }
+        return;
     }
     args[argCount] = NULL; 
     pid = fork();
