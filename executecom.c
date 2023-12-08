@@ -18,7 +18,13 @@ void executeCommand(const char *command) {
         args[argCount++] = token;
         token = strtok(NULL, " ");
     }
+  args[argCount] = NULL; 
 
+  
+    if (strcmp(args[0], "exit") == 0) {
+     
+        exit(EXIT_SUCCESS);
+    }
     args[argCount] = NULL; 
     pid = fork();
 
